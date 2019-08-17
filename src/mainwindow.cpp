@@ -567,6 +567,7 @@ void MainWindow::createActions() {
     actionMap.insert("subscribeChannel", action);
     mediaView->updateSubscriptionActionForVideo(0, false);
 
+#ifndef APP_KIDSTUBE
     QString shareTip = tr("Share the current video using %1");
 
     action = new QAction("&Twitter", this);
@@ -589,6 +590,7 @@ void MainWindow::createActions() {
     action->setEnabled(false);
     actionMap.insert("email", action);
     connect(action, SIGNAL(triggered()), mediaView, SLOT(shareViaEmail()));
+#endif
 
     action = new QAction(tr("&Close"), this);
     action->setShortcut(QKeySequence(QKeySequence::Close));
@@ -652,6 +654,11 @@ void MainWindow::createActions() {
     IconUtils::setIcon(action, "safesearch");
     action->setStatusTip(tr("Hide videos that may contain inappropriate content"));
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_K));
+#ifdef APP_KIDSTUBE
+	action->setEnabled(false);
+	action->setChecked(true);
+	action->setVisible(false);
+#endif
     action->setCheckable(true);
     actionMap.insert("safeSearch", action);
 
@@ -740,11 +747,13 @@ void MainWindow::createMenus() {
     QMenu *shareMenu = menuBar()->addMenu(tr("&Share"));
     menuMap.insert("share", shareMenu);
     shareMenu->addAction(copyPageAct);
+#ifndef APP_KIDSTUBE
     shareMenu->addSeparator();
     shareMenu->addAction(getAction("twitter"));
     shareMenu->addAction(getAction("facebook"));
     shareMenu->addSeparator();
     shareMenu->addAction(getAction("email"));
+#endif
 
     QMenu *viewMenu = menuBar()->addMenu(tr("&View"));
     menuMap.insert("view", viewMenu);

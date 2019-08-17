@@ -146,9 +146,11 @@ void MediaView::initialize() {
 #ifdef APP_SNAPSHOT
             "snapshot",
 #endif
+#ifndef APP_KIDSTUBE
+            "twitter",  "facebook", "email",
+#endif
             "webpage",  "pagelink", "videolink",     "openInBrowser", "findVideoParts",
-            "skip",     "previous", "stopafterthis", "relatedVideos", "refineSearch",
-            "twitter",  "facebook", "email"};
+            "skip",     "previous", "stopafterthis", "relatedVideos", "refineSearch"};
     currentVideoActions.reserve(videoActionNames.size());
     for (auto *name : videoActionNames) {
         currentVideoActions.append(mainWindow->getAction(name));

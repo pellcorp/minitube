@@ -97,7 +97,7 @@ SearchView::SearchView(QWidget *parent) : View(parent) {
         QString cssColor = QString::asprintf("rgba(%d,%d,%d,%d)", r, g, b, a);
         QString text =
                 QString("<h1 style='font-weight:300;color:%1'>").arg(cssColor) +
-                tr("Welcome to <a href='%1'>%2</a>,")
+                tr("Welcome to <a href='%1'>%2</a>")
                         .replace("<a ", "<a style='text-decoration:none; color:palette(text)' ")
                         .arg(Constants::WEBSITE, Constants::NAME) +
                 "</h1>";

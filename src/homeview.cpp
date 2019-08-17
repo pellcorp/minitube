@@ -55,11 +55,13 @@ void HomeView::setupBar() {
     bar->addAction(action);
     bar->setCheckedAction(action);
 
+#ifndef APP_KIDSTUBE
     action = new QAction(tr("Browse"), this);
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_2));
     action->setStatusTip(tr("Browse videos by category"));
     connect(action, SIGNAL(triggered()), SLOT(showStandardFeeds()));
     bar->addAction(action);
+#endif
 
     subscriptionsAction = new QAction(tr("Subscriptions"), this);
     subscriptionsAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_3));
@@ -128,7 +130,11 @@ void HomeView::showChannels() {
         stackedWidget->addWidget(channelsView);
     }
     showWidget(channelsView);
+#ifndef APP_KIDSTUBE
     bar->setCheckedAction(2);
+#else
+    bar->setCheckedAction(1);
+#endif
 }
 
 void HomeView::unwatchedCountChanged(int count) {

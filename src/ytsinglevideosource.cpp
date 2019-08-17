@@ -63,6 +63,11 @@ void YTSingleVideoSource::loadVideos(int max, int startIndex) {
         q.addQueryItem("type", "video");
         q.addQueryItem("relatedToVideoId", videoId);
         q.addQueryItem("maxResults", QString::number(max));
+
+#ifdef APP_KIDSTUBE
+        q.addQueryItem("safeSearch", "strict");
+#endif
+
         if (startIndex > 2) {
             if (maybeReloadToken(max, startIndex)) return;
             q.addQueryItem("pageToken", nextPageToken);
@@ -72,6 +77,7 @@ void YTSingleVideoSource::loadVideos(int max, int startIndex) {
 
     lastUrl = url;
 
+    // qWarning() << "YT single video source" << url.toString();
     QObject *reply = HttpUtils::yt().get(url);
     connect(reply, SIGNAL(data(QByteArray)), SLOT(parseResults(QByteArray)));
     connect(reply, SIGNAL(error(QString)), SLOT(requestError(QString)));

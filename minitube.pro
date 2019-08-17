@@ -4,7 +4,7 @@ TEMPLATE = app
 VERSION = 3.1
 DEFINES += APP_VERSION="$$VERSION"
 
-APP_NAME = Minitube
+APP_NAME = Kidstube
 DEFINES += APP_NAME="$$APP_NAME"
 
 APP_UNIX_NAME = minitube

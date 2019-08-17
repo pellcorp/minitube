@@ -125,6 +125,9 @@ void YTSearch::loadVideos(int max, int startIndex) {
         break;
     }
 
+#ifdef APP_KIDSTUBE
+    q.addQueryItem("safeSearch", "strict");
+#else
     switch (searchParams->safeSearch()) {
     case SearchParams::None:
         q.addQueryItem("safeSearch", "none");
@@ -133,6 +136,7 @@ void YTSearch::loadVideos(int max, int startIndex) {
         q.addQueryItem("safeSearch", "strict");
         break;
     }
+#endif
 
     url.setQuery(q);
 
